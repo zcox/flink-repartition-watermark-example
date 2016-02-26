@@ -40,7 +40,7 @@ Each task also receives watermarks from all upstream tasks:
 ![](img/receive-watermarks.png)
 
 The task tracks the max incoming watermark from each upstream task separately. As an incoming watermark advances, the task computes its own watermark as the min
-of all incoming watermarks. As the task's watermark advances, it also broadcasts it to all downstream tasks.
+of all incoming watermarks. As the task's watermark advances, its provides this watermark to its operator so it can do things like trigger the output of windows, and it also broadcasts it to all downstream tasks.
 
 ## Observations
 

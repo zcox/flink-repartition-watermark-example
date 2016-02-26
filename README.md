@@ -1,6 +1,6 @@
 ## Overview
 
-See [this Flink mailing list thread](http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Watermarks-with-repartition-tt5165.html).
+See [this Flink mailing list thread](http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Watermarks-with-repartition-tt5165.html). For more background on watermarks, triggers, and windows in relation to unbounded stream processing, see this excellent series: [part 1](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101) and [part 2](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101).
 
 This is a simple example that shows what happens in a Flink job when timestamps and watermarks from parallel source partitions diverge over time.
 
@@ -795,3 +795,8 @@ At the end of the program, both streams finish, and the window count tasks' wate
 02/26/2016 10:28:57 TriggerWindow(TumblingTimeWindows(3600000), FoldingStateDescriptor{name=window-contents, defaultValue=WindowAggregate: aggregate=0 for key=<key undefined> in [<start undefined>, <end undefined>), system time = 2016-02-26T10:25:12.222-06:00, serializer=null}, EventTimeTrigger(), WindowedStream.apply(WindowedStream.scala:331)) -> Sink: Unnamed(2/2) switched to FINISHED
 02/26/2016 10:28:57 Job execution switched to status FINISHED.
 ```
+
+## Conclusion
+
+It's great to know that Flink does the right thing with watermarks from parallel source partitions!
+

@@ -44,7 +44,7 @@ of all incoming watermarks. As the task's watermark advances, its provides this 
 
 ## Observations
 
-You should be able to execute this example program locally by doing `sbt run`. Output will be something like is show below. Note that there are approximately 
+You should be able to execute this example program locally by doing `sbt run`. Output will be something like what is shown below. Note that there are approximately 
 350-400 pageviews per url per hour on 2016-02-01, and each hour window is triggered roughly every 5 seconds in processing time. Then there are approximately 700 
 pageviews per url per hour on 2016-02-02, since the 2 source partitions overlap on that day. Again these windows are triggered every 5 seconds in processing time.
 Then 2016-02-03 has approx 350-400 pageviews per url per hour, but notice that all windows on this day are triggered almost simultaneously in processing time.

@@ -2,7 +2,7 @@
 
 See [this Flink mailing list thread](http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Watermarks-with-repartition-tt5165.html).
 
-This is a simple example that shows what happens in a Flink job when watermarks from parallel source partitions diverge over time.
+This is a simple example that shows what happens in a Flink job when timestamps and watermarks from parallel source partitions diverge over time.
 
 ## Example Job
 

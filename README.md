@@ -14,7 +14,9 @@ The events come from a source with 2 partitions, and job parallelism=2, so the e
 
 ![](img/executiongraph.png)
 
-The event timestamps (and watermarks) in the 2 source partitions are skewed by 1 day. We're primarily interested in what happens at each window count task; each of these
+The event timestamps (and watermarks) in the 2 source partitions are skewed by 1 day. While this would not normally happen when the stream processor is "caught up" with the head of the stream, this could very well happen if we are reprocessing a large batch of historical events, to say, backfill a queryable database. 
+
+We're primarily interested in what happens at each window count task; each of these
 tasks will receive events and watermarks from each of the sources, with timestamps skewed by 1 day. Does Flink handle this properly, and only trigger the windows when the 
 slowest watermark has passed the end of the window?
 

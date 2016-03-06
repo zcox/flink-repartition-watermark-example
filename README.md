@@ -33,7 +33,7 @@ However, when a task's watermark advances it broadcasts that watermark to all po
 
 ![](img/broadcast-watermark.png)
 
-When a hash partition is used (becasuse of a `keyBy` operation on the stream) each downstream task can receive records from all upstream tasks:
+When a hash partition is used (because of a `keyBy` operation on the stream) each downstream task can receive records from all upstream tasks:
 
 ![](img/receive-records.png)
 
@@ -42,7 +42,7 @@ Each task also receives watermarks from all upstream tasks:
 ![](img/receive-watermarks.png)
 
 The task tracks the max incoming watermark from each upstream task separately. As an incoming watermark advances, the task computes its own watermark as the min
-of all incoming watermarks. As the task's watermark advances, its provides this watermark to its operator so it can do things like trigger the output of windows, and it also broadcasts it to all downstream tasks.
+of all incoming watermarks. As the task's watermark advances, it provides this watermark to its operator so it can do things like trigger the output of windows, and it also broadcasts the watermark to all downstream tasks.
 
 ## Observations
 

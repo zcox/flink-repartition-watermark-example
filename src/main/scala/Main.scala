@@ -18,7 +18,6 @@ object Main extends App {
   val environment = StreamExecutionEnvironment.getExecutionEnvironment
   environment.setParallelism(pageviews.size)
   environment.setStreamTimeCharacteristic(EventTime)
-  // environment.getConfig.enableTimestamps()
   environment
     .fromParallelCollection(SplittableIteratorFromSeqs(pageviews: _*))
     .assignTimestampsAndWatermarks(new PageviewTimestampAssigner)

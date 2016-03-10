@@ -31,6 +31,7 @@ object WindowAggregate {
     WindowAggregate(implicitly[Numeric[R]].plus(a1.aggregate, a2.aggregate))
 
   //TODO since collect now takes an Iterable[R], it needs to use the same aggregate function that was used to pre-aggregate
+  //TODO or if the Iterable[R] should only ever contain one element (since window was pre-aggregated) then just use aggregates.head
   /** Can be used as the (K, W, Iterable[R], Collector[R]) => Unit window apply function to emit the aggregate. */
   def collect[K, R: Numeric](key: K, window: TimeWindow, aggregates: Iterable[WindowAggregate[K, R]], collector: Collector[WindowAggregate[K, R]]): Unit = 
     collector.collect(aggregates.reduce(plus[K, R] _).withKeyStartAndEnd(key, window.getStart, window.getEnd))

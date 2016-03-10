@@ -18,10 +18,10 @@ object Main extends App {
   val environment = StreamExecutionEnvironment.getExecutionEnvironment
   environment.setParallelism(pageviews.size)
   environment.setStreamTimeCharacteristic(EventTime)
-  environment.getConfig.enableTimestamps()
+  // environment.getConfig.enableTimestamps()
   environment
     .fromParallelCollection(SplittableIteratorFromSeqs(pageviews: _*))
-    .assignTimestamps(new PageviewTimestampExtractor)
+    .assignTimestampsAndWatermarks(new PageviewTimestampAssigner)
     .keyBy(_.url)
     .timeWindow(Time.hours(1)) //really need a Time DSL like scala.concurrent.duration. e.g.: .timeWindow(1 hour)
     .apply(WindowAggregate.zero[String, Long], WindowAggregate.count[String, Long] _, WindowAggregate.collect[String, Long] _) //hide this ugly thing in a nice util method in an implicit class

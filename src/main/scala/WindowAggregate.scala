@@ -27,7 +27,11 @@ object WindowAggregate {
     count.copy(aggregate = numeric.plus(count.aggregate, numeric.one))
   }
 
-  /** Can be used as the (K, W, R, Collector[R]) => Unit window apply function to emit the aggregate. */
-  def collect[K, R](key: K, window: TimeWindow, aggregate: WindowAggregate[K, R], collector: Collector[WindowAggregate[K, R]]): Unit = 
-    collector.collect(aggregate.withKeyStartAndEnd(key, window.getStart, window.getEnd))
+  def plus[K, R: Numeric](a1: WindowAggregate[K, R], a2: WindowAggregate[K, R]): WindowAggregate[K, R] = 
+    WindowAggregate(implicitly[Numeric[R]].plus(a1.aggregate, a2.aggregate))
+
+  //TODO since collect now takes an Iterable[R], it needs to use the same aggregate function that was used to pre-aggregate
+  /** Can be used as the (K, W, Iterable[R], Collector[R]) => Unit window apply function to emit the aggregate. */
+  def collect[K, R: Numeric](key: K, window: TimeWindow, aggregates: Iterable[WindowAggregate[K, R]], collector: Collector[WindowAggregate[K, R]]): Unit = 
+    collector.collect(aggregates.reduce(plus[K, R] _).withKeyStartAndEnd(key, window.getStart, window.getEnd))
 }

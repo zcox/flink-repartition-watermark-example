@@ -1,5 +1,3 @@
-resolvers += "Flink 1.0.0 RC repository" at "https://repository.apache.org/content/repositories/orgapacheflink-1062/"
-
 libraryDependencies ++= {
   val flinkVersion = "1.0.0"
   Seq(

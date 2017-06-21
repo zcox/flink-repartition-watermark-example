@@ -1,6 +1,6 @@
 ## Overview
 
-See [this Flink mailing list thread](http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Watermarks-with-repartition-tt5165.html). For more background on watermarks, triggers, and windows in relation to unbounded stream processing, see this excellent series: [part 1](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101) and [part 2](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101).
+See [this Flink mailing list thread](http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Watermarks-with-repartition-tt5165.html). For more background on watermarks, triggers, and windows in relation to unbounded stream processing, see this excellent series: [part 1](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101) and [part 2](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-102).
 
 This is a simple example that shows what happens in a Flink job when timestamps and watermarks from parallel source partitions diverge over time.
 
